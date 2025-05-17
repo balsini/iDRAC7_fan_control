@@ -30,9 +30,9 @@ SPEED25="0x19"
 SPEED30="0x1e"
 SPEED35="0x23"
 TEMP_THRESHOLD="50" # iDRAC dynamic control enable thershold
-TEMP_SENSOR="04h"   # Inlet Temp
+#TEMP_SENSOR="04h"   # Inlet Temp
 #TEMP_SENSOR="01h"  # Exhaust Temp
-#TEMP_SENSOR="0Eh"  # CPU 1 Temp
+TEMP_SENSOR="0Eh"  # CPU 1 Temp
 #TEMP_SENSOR="0Fh"  # CPU 2 Temp
 
 # Get system date & time.
@@ -42,7 +42,7 @@ echo "Date $DATE"
 # Get temperature from iDARC.
 T=$(ipmitool -I lanplus -H $IDRAC_IP -U $IDRAC_USER -P $IDRAC_PASSWORD sdr type temperature | grep $TEMP_SENSOR | cut -d"|" -f5 | cut -d" " -f2)
 echo "--> iDRAC IP Address: $IDRAC_IP"
-echo "--> Current Inlet Temp: $T"
+echo "--> Current CPU Temp: $T"
 
 # If ambient temperature is above 35deg C enable dynamic control and exit, if below set manual control.
 if [[ $T -ge $TEMP_THRESHOLD ]]
