@@ -29,7 +29,7 @@ SPEED20="0x14"
 SPEED25="0x19"
 SPEED30="0x1e"
 SPEED35="0x23"
-TEMP_THRESHOLD="35" # iDRAC dynamic control enable thershold
+TEMP_THRESHOLD="50" # iDRAC dynamic control enable thershold
 TEMP_SENSOR="04h"   # Inlet Temp
 #TEMP_SENSOR="01h"  # Exhaust Temp
 #TEMP_SENSOR="0Eh"  # CPU 1 Temp
@@ -58,6 +58,11 @@ else
   ipmitool -I lanplus -H $IDRAC_IP -U $IDRAC_USER -P $IDRAC_PASSWORD raw 0x30 0x30 0x01 0x00
 fi
 
+MAX_SPEED=35
+
+DYN_SPEED=$((MAX_SPEED * T / TEMP_THRESHOLD))
+
+echo "--> Setting fan speed to $DYN_SPEED%"
 exit 0
 
 # Set fan speed dependant on ambient temperature if inlet temperaturte is below 35deg C.
