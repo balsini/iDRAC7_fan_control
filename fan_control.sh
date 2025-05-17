@@ -39,6 +39,7 @@ TEMP_SENSOR="04h"   # Inlet Temp
 DATE=$(date +%d-%m-%Y\ %H:%M:%S)
 echo "Date $DATE"
 
+
 # Get temperature from iDARC.
 T=$(ipmitool -I lanplus -H $IDRAC_IP -U $IDRAC_USER -P $IDRAC_PASSWORD sdr type temperature | grep $TEMP_SENSOR | cut -d"|" -f5 | cut -d" " -f2)
 echo "--> iDRAC IP Address: $IDRAC_IP"
@@ -56,6 +57,8 @@ else
   echo "--> Disabled dynamic fan control"
   ipmitool -I lanplus -H $IDRAC_IP -U $IDRAC_USER -P $IDRAC_PASSWORD raw 0x30 0x30 0x01 0x00
 fi
+
+exit 0
 
 # Set fan speed dependant on ambient temperature if inlet temperaturte is below 35deg C.
 # If inlet temperature between 1 and 14deg C then set fans to 10%.
