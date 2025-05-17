@@ -10,7 +10,7 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 echo $SCRIPT_DIR
-git -C $SCRIPT_DIR reset --hard HEAD
+git -C $SCRIPT_DIR reset --hard origin/master
 git -C $SCRIPT_DIR pull
 chmod +x $SCRIPT_DIR/fan_control.sh
 
