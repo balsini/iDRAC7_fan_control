@@ -7,6 +7,11 @@
 # The tower servers T320, T420 & T620 inlet temperature sensor is after the HDDs so temperature will
 # be higher than the ambient temperature.
 
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+git -C $SCRIPT_DIR reset --hard HEAD
+git -C $SCRIPT_DIR pull
+
 # Variables
 IDRAC_IP="IP address of iDRAC"
 IDRAC_USER="user"
