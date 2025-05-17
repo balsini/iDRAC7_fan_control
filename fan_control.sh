@@ -17,7 +17,7 @@ chmod +x $SCRIPT_DIR/fan_control.sh
 source .env
 
 # Variables
-#IDRAC_IP="IP address of iDRAC"
+IDRAC_IP=$(arp -a | grep idrac | cut -d " " -f 2 | sed -e "s/[\(\)]//g")
 #IDRAC_USER="user"
 #IDRAC_PASSWORD="passowrd"
 # Fan speed in %
